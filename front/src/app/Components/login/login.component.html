@@ -1,0 +1,37 @@
+<div style="margin:auto">
+  <form (ngSubmit)="mojaforma.form.valid && tryLogin()" #mojaforma='ngForm'>
+<table class="loginTab">
+  <caption>Login</caption>
+  <tr>
+        <span class="ui-float-label">
+        <input id="float1-input" type="text"  name = "user" #name="ngModel" size="30"  [(ngModel)] = 'userName' required pInputText> 
+        <label for="float1-input">Username</label>
+        
+      </span>
+      <label *ngIf = 'mojaforma.submitted && name.invalid'  style="color: red">Unesite user name</label>
+    
+    
+</tr>
+
+  <tr>
+    <td>
+      <span class="ui-float-label">
+          <input id="float-input" name="password" 
+          #pass="ngModel" type="password" size="30" [(ngModel)]  = "password" required  pInputText> 
+          <label for="float-input">password</label>
+        </span>
+        <label *ngIf = "mojaforma.submitted && pass.invalid" style="color: red">Unesite password</label>
+    </td>
+
+  </tr>
+
+  <tr>
+    <tD>
+      <p-button label = "Login" icon="pi pi-caret-right" iconPos = 'right'></p-button> &nbsp;
+      <a routerLink='/register'>Registacija</a> 
+    </tD>
+
+  </tr>
+</table>
+</form>
+</div>

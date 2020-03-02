@@ -1,0 +1,19 @@
+<br>
+<div *ngIf = "tip == 'anketa'">
+    <p-button label="DodajOdg"  (onClick) = "addAnswer($event)" icon="pi pi-plus"></p-button> &nbsp;
+    <p-button label="Ukloni"  (onClick) = "removeAnswer($event)" icon="pi pi-times"></p-button>
+<br>
+<ng-container *ngFor="let i of ' '.repeat(brOdgovora).split(''), let x = index">
+  <br>
+  Odgovor{{x + 1}}:<input type="text" disabled pInputText>
+  <br>
+</ng-container>
+</div>
+
+<div *ngIf = "tip == 'test'">
+<ng-container  *ngFor="let i of ' '.repeat(brOdgovora).split(''), let x = index">
+    <br>
+    Unesi tac odgovr:<input type="number" [(ngModel)] = 'correctAnswer' pInputText required>
+    <br>
+  </ng-container>
+</div>

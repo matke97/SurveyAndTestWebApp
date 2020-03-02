@@ -1,0 +1,41 @@
+
+<div style="border: 2px; border-style: dotted; border-color: blue">
+    <br>
+    Pitanje: <p-dropdown [options]="pitanja" [(ngModel)]="selectedQuestion"></p-dropdown> &nbsp;
+    <input *ngIf = "selectedQuestion == null" type="text" pInputText  [(ngModel)]="novoPitanje" required />
+    {{selectedQuestion}}
+    
+    <br><br>
+    Tip odgovora: <p-dropdown [options]="odgovori" [(ngModel)]="selectedAnsType"></p-dropdown><br><br>
+    <div [ngSwitch] = "selectedAnsType">
+      
+      <app-odg-num-vrednost *ngSwitchCase="1" [tip] = "tip" #answer1></app-odg-num-vrednost>
+      
+
+      <app-odg-shrot-txt *ngSwitchCase="2" [tip] = "tip" #answer2></app-odg-shrot-txt>
+        
+      
+
+      <app-odg-txt-area *ngSwitchCase="3" [tip] = "tip" #answer3></app-odg-txt-area>
+        
+     
+
+      <app-odg-radio-btn *ngSwitchCase="4" [tip] = "tip" #answer4></app-odg-radio-btn>
+        
+     
+
+
+      <app-odg-checkbox *ngSwitchCase="5" [tip] = "tip" #answer5></app-odg-checkbox>
+        
+      
+
+       <br>
+       <div *ngIf="tip == 'test'">
+          Broj poena: <input type="number" [(ngModel)] = 'question.brPoena' pInputText required>
+       </div>
+       <div *ngIf="tip == 'anketa'">
+         Obavezno pitanje(*):  <p-inputSwitch [(ngModel)]="obavezno"></p-inputSwitch>
+        </div>
+    </div>
+  </div>
+  <br>

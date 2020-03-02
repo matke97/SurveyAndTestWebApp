@@ -1,0 +1,53 @@
+<form (ngSubmit)="regForma.form.valid && changePass()"  #regForma = 'ngForm'>
+<table>
+    <tr>
+        <td>
+            <span class="ui-float-label">
+                <input id="pass1" type="password"  name = "pass1" #pass1="ngModel" size="30"  [(ngModel)] = 'oldPass'  required pInputText> 
+                <label for="pass1">&nbsp; Stari password</label>
+                
+              </span>
+              <label *ngIf = "regForma.submitted && pass1.errors?.required" style="color: red">Unesite lozinku</label>
+              
+        </td>
+
+        <TD>
+            
+          </TD>
+      </tr>
+
+      <tr>
+          <td>
+              <span class="ui-float-label">
+                  <input id="pass2" type="password"  name = "pass2" #pass2="ngModel" size="30"  [(ngModel)] = 'newPass1' minlength="8" maxlength="16"
+                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@\.\*_]).{8,16}$" pInputText required> 
+                  <label for="pass2">&nbsp; Novi password*</label>
+                  
+                </span>
+                <label *ngIf = "regForma.submitted && pass2.errors?.required" style="color: red">Unesite lozinku</label>
+          </td>
+
+          <TD>
+              <div *ngIf = 'regForma.submitted && pass2.invalid'  style="color: red">
+                  
+                  <label *ngIf = "pass2.errors.pattern">Lozinka mora sadrzati bar 1 veliko slovo 1 spec zank i jedan broj</label>
+                </div>
+            </TD>
+        </tr>
+    <tr>
+        <td>
+            <span class="ui-float-label">
+                <input id="pass3" type="password"  name = "pass3" #pass3="ngModel" size="30"  [(ngModel)] = 'newPass2' minlength="8" maxlength="16" pInputText required> 
+                <label for="pass3">&nbsp; Potvrdi*</label>
+                
+              </span>
+              <label *ngIf = "regForma.submitted && pass3.errors?.required" style="color: red">Unesite lozinku</label>
+        </td>
+
+        
+      </tr>
+      <tr>
+          <p-button label = "Promeni password" icon="pi pi-caret-right" iconPos = 'right' ></p-button>
+      </tr>
+  </table>
+</form>

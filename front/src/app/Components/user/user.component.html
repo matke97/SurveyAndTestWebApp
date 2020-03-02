@@ -1,0 +1,88 @@
+<header>
+    Welcome, {{user.ime}} 
+      <br>
+      <p-toolbar>
+        <div class="ui-toolbar-group-right">
+            <p-button label = "PremenaPass" (onClick) = "chPass()"></p-button> &nbsp;
+            <p-button label = "LogOut" icon="pi pi-sign-out" (onClick) = "logout($event)"></p-button>
+        </div>
+        </p-toolbar>
+    
+     <br>
+</header>
+
+<br>
+
+<div *ngIf="user.tip == 'kreator'">
+  <table style="margin: auto">
+    <bR>
+    <tr>
+      <td>Moje ankete :  <p-dropdown [options]="mojeAnkete" [(ngModel)]="selectedMojaAnketa"></p-dropdown> </td>
+
+
+      <td *ngIf = 'selectedMojaAnketa != null'>
+                {{selectedMojaAnketa.opis}}           <br>
+       Pocetak: {{selectedMojaAnketa.pocetak | date}} <br>
+          Kraj: {{selectedMojaAnketa.kraj | date}}
+      </td>
+   
+    
+      
+      <br>
+    </tr>
+    <tr *ngIf = 'selectedMojaAnketa != null'>
+        <td>
+            <p-button label = "Pogledaj Detalje" icon="pi pi-question-circle" iconPos = 'right' (onClick) = "pogledajRez($event)"></p-button>
+        </td>
+        <td >
+            <p-button label = "Obrisi" icon="pi pi-times" iconPos = 'right' (onClick) = "obrisiAnketu($event)"></p-button>
+        </td>
+        
+    </tr>
+    <bR>
+
+    <tr>
+      <td colspan="2">
+          <p-button label = "Kreiraj novu" icon="pi pi-caret-right" iconPos = 'right' (onClick) = "kreirajNovu($event)"></p-button>
+      </td>
+    </tr>
+  </table>
+
+  
+
+</div>
+<br><br>
+
+<table style="margin: auto">
+  <tr>
+      <td>Sortiraj po: 
+      <p-dropdown [options]="sortBy" [(ngModel)]="selectedSortType" (onChange) = "sortiraj()"></p-dropdown> </td>
+  </tr>
+  <tr>
+    <td>Dostupne ankete <p-dropdown [options]="dostupneAnkete" [(ngModel)]="selectedAnketa" [filter]="true" filterBy="label"></p-dropdown></td>
+    <td *ngIf = 'selectedAnketa != null'>
+       Opis: {{selectedAnketa.opis}}  <br>
+       Personalizovana: {{selectedAnketa.personalizovana  && 'Da' || 'Ne'}} <br>
+       Popunjena : {{selectedAnketa.popunjena && 'Da' || 'Ne'}}
+    </td>
+    <td *ngIf = 'selectedAnketa != null'>
+        <p-button id ="ankBtn" label = "Popuni anketu" icon="pi pi-caret-right" iconPos = 'right' (onClick) = "popuni($event)" [disabled] = "(selectedAnketa.popunjena || danasnji < selectedAnketa.pocetak || danasnji > selectedAnketa.kraj)"></p-button>
+    </td>
+    
+  </tr>
+  <tr>
+    <td>
+        Dostupni testovi <p-dropdown [options]="dostupniTestovi" [(ngModel)]="selectedTest" [filter]="true" filterBy="label"></p-dropdown>
+    </td>
+    <td *ngIf = 'selectedTest != null'>
+      Opis:  {{selectedTest.opis}} <br>
+      Vreme testiranja : {{selectedTest.vreme}}sec <br>
+      {{selectedTest.popunjena && 'Popunili ste test. Br osvojenih poena(/od mogucih): ' || ''}}  
+      {{selectedTest.brPoena}} / {{selectedTest.maxPoena}}
+    </td>
+    <td *ngIf = 'selectedTest != null'>
+        <p-button id ="tstBtn" label = "Popuni test" icon="pi pi-caret-right" iconPos = 'right' (onClick) = "popuni($event)" [disabled] = "(selectedTest.popunjena || danasnji < selectedTest.pocetak || danasnji > selectedTest.kraj)"></p-button>
+    </td>
+  </tr>
+</table>
+

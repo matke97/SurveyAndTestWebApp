@@ -1,0 +1,43 @@
+
+<div [ngSwitch] = "pitanje.tipOdgovra" style="border: 1px; border-style: dotted; border-color: blue; width: 70ch; margin: auto;">
+  {{pitanje.tekstPitanja}} &nbsp;
+  <div style="color: red" *ngIf = "pitanje.obavezno">
+    *
+  </div>
+  <br><br>
+  
+  <div *ngSwitchCase= 1>
+      Unesi odgovr:<input type="number" [(ngModel)] = 'odgovor' pInputText  (ngModelChange)="change($event)">
+  </div>
+
+  <div *ngSwitchCase= 2>
+      Unesi odgovr:<input type="text" [(ngModel)] = 'odgovor' pInputText  (ngModelChange)="change($event)">
+    </div>
+
+  <div *ngSwitchCase= 3>
+      Unesi odgovr:<br><textarea pInputTextarea [rows]="4" [cols]="22" autoResize="autoResize"  [(ngModel)] = 'odgovor' (ngModelChange)="change($event)"></textarea>
+  </div>
+
+  <div *ngSwitchCase= 4>
+    <table style="margin : auto"> 
+      <tr *ngFor = 'let i of pitanje.odgovori'>
+        <td> <p-radioButton name={{pitanje.tekstPitanja}} value = {{i}} [(ngModel)] = "odgovor"  (ngModelChange)="change($event)"></p-radioButton> </td> 
+        <td>{{i}} </td> <br>
+      </tr>
+    </table>
+  </div>
+
+  <div *ngSwitchCase=5>
+
+      <table style="margin : auto"> 
+          <tr *ngFor = 'let i of pitanje.odgovori'>
+            <td> <p-checkbox name={{pitanje.tekstPitanja}} value = {{i}} [(ngModel)] = "odgovor"  (ngModelChange)="change($event)"></p-checkbox> </td> 
+            <td>{{i}} </td> <br>
+          </tr>
+        </table>
+  
+  </div>  
+</div>
+
+
+<br><Br>

@@ -1,0 +1,72 @@
+<header>Forma za kreiranje anketa/testova</header>
+
+<div class="prva">
+  <div *ngIf = "faza == 0">
+    <br>
+     Naziv<br> <input type="text" pInputText  [(ngModel)]="model.naziv" required/> <br><br>
+
+     Opis<br> <textarea [rows]="4" [cols]="22"  pInputTextarea  autoResize="autoResize" [(ngModel)]="model.opis" required></textarea>
+
+     <br><br>
+     Interval trajanja<br>
+    <p-calendar id="cal" name="calendar" placeholder="Datum od" [monthNavigator]="true" [yearNavigator]="true" yearRange="2017:2021"  [(ngModel)]="model.pocetak" dateFormat="dd.mm.yy"></p-calendar> &nbsp;
+    <p-calendar id="cal" name="calendar" placeholder="Datum do" [monthNavigator]="true" [yearNavigator]="true" yearRange="2017:2021"  [(ngModel)]="model.kraj" dateFormat="dd.mm.yy"></p-calendar>
+     
+
+    <br> <br>Izaberi tip <br>
+      Anketa <p-radioButton name="tip" value="anketa" [(ngModel)]="tip"></p-radioButton> &nbsp;
+      Test <p-radioButton name="tip" value="test" [(ngModel)]="tip"></p-radioButton> <br><br>
+      <ng-container *ngIf = "tip == 'anketa'">
+      Personalizovna: <p-inputSwitch [(ngModel)]="personalizovana"></p-inputSwitch>
+    </ng-container>
+  </div>
+
+  <div *ngIf= "faza == 1" style="width: 65ch;margin: auto">
+    {{model.naziv}}
+    <p-toolbar>
+        <div class="ui-toolbar-group-left">
+            <p-button label="Dodaj pitanje"  (onClick) = "addQuest($event)" icon="pi pi-plus"></p-button>
+        </div>
+        <div class="ui-toolbar-group-right">
+            <p-button label="Ukolni pitanje"  (onClick) = "removeQuest($event)" icon="pi pi-minus"></p-button>
+        </div>
+        {{brPitanja}}
+    </p-toolbar>
+
+  <ng-container *ngFor="let i of ' '.repeat(brPitanja).split('')">
+    <app-pitanje 
+        [pitanja] = "pitanja"
+        [odgovori] = "odgovori"
+        [tip] = "tip"
+        #pitanjaComponent
+    ></app-pitanje>
+  </ng-container>  
+ 
+  </div>
+
+  <div *ngIf = "faza == 2">
+    <br>
+    Anketa : {{model.naziv}} <br>
+    Broj pitanja : {{brPitanja}} <br>
+    Ptianja:
+    <ng-container *ngFor = "let m of model.pitanjaLista">
+      {{m.tekstPitanja}},   
+    </ng-container> <br>
+    Unesite broj stranica : 
+    <input type="number" [(ngModel)] = 'brStranica' pInputText required>
+    <ng-container *ngIf = "tip == 'test'">
+      Unesi vreme tajanja testiranja(u sec): <input type="number" [(ngModel)] = "model.vreme" pInputText required>
+    </ng-container>
+    <br><br><br>
+    Klik na nazad ponistava sva pitanja, dalje upisuje anketu u bazu podataka.
+    
+
+  </div>
+
+
+  <br><br> <p-button label="Nazad" (onClick) = "back($event)" icon="pi pi-caret-left"></p-button>  &nbsp;
+  <p-button label="Dalje" (onClick) = "next($event)" icon = "pi pi-caret-right" iconPos = 'right'></p-button>
+
+</div>
+
+<br><br>

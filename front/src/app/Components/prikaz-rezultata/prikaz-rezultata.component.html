@@ -1,0 +1,60 @@
+<header>
+    <p-toolbar>
+      <div  class="ui-toolbar-group-left">
+          <p-button label = "Home" icon="pi pi-home" (onClick) = "retHome()"></p-button>
+      </div>
+      {{anketa.naziv}}
+        <div class="ui-toolbar-group-right">
+            
+            <p-button label = "LogOut" icon="pi pi-sign-out" (onClick) = "logout()"></p-button>
+        </div>
+        </p-toolbar>
+    </header>
+<br>
+    
+<bR>
+  <div *ngIf = "anketa.tip == 'anketa'">
+<p-tabView>
+  <p-tabPanel header="Prikaz listica">
+    <ng-container *ngFor = "let l of listici, let n = index">
+      <bR>
+       {{n + 1}}
+      <br>
+      <div *ngIf = "l.ispitanik">
+        {{l.ispitanik.ime}} {{l.ispitanik.prezime}} {{l.ispitanik.datum_rodj | date}} <br>
+      </div>
+      <table>
+        <tr *ngFor = "let pit of l.pitanja, let i = index">
+            <tD>
+              {{pit}}
+            </tD>
+            <td>
+                {{l.odgovori[i]}}
+            </td>
+          </tr>
+      </table>
+    </ng-container>
+  </p-tabPanel>
+  <p-tabPanel header="Zbirni izvestaj">
+    <div *ngIf = 'spremno'>
+    <div *ngFor = "let izv of zbirniIzv, let i = index">
+        {{listici[0].pitanja[i]}} <br>
+        <p-chart type="pie" [data]="izv"></p-chart>
+    </div>
+  </div>
+  </p-tabPanel>
+</p-tabView>
+</div>
+
+<div *ngIf = "anketa.tip == 'test'">
+    <ng-container *ngFor = "let l of listici, let n = index">
+      <br>
+      {{n+1}}: {{l.ispitanik.ime}} {{l.ispitanik.prezime}} - {{l.osvojeno}} / {{l.maxPoena}}
+      <br>
+    </ng-container>
+    <br>
+    <div style="margin: auto;text-align: center">
+      <p-chart type="bar" [data]="grupniUspeh" width="95vw" height="60vh"></p-chart>
+    </div>
+</div>
+<br><bR><br>

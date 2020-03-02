@@ -1,0 +1,68 @@
+<header>
+    <p-toolbar> 
+        <div class="ui-toolbar-group-right">
+            
+            <p-button label = "LogOut" icon="pi pi-sign-out" (onClick) = "logOut()"></p-button>
+        </div>
+        </p-toolbar>
+    </header>
+  
+  <table class="tb">
+    <tr>
+      <td>
+    <p-listbox [options]="selItems" [(ngModel)]="selectedUser">
+        <p-header>
+           Cekaju potvrdu
+        </p-header>
+        <ng-template let-user let-i="index" pTemplate="item">
+          {{user.label}}/{{user.value.userName}}
+        </ng-template>
+      </p-listbox>
+      </td>
+      <td>
+      <div *ngIf = "selectedUser != null">
+          {{selectedUser.userName}} <br>
+          {{selectedUser.email}}
+        </div>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div *ngIf = "selectedUser != null">
+            Ispitanik <p-radioButton name="tip" value="ispitanik" [(ngModel)]="selectedUser.tip"></p-radioButton> &nbsp;
+            Kreator <p-radioButton name="tip" value="kreator" [(ngModel)]="selectedUser.tip"></p-radioButton>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td><p-button label="Registruj" (onClick) = "registruj($event)"></p-button></td>
+        <td><p-button label="Odbaci" (onClick) = "odbijReg($event)"></p-button></td>
+    </tr>
+    
+ 
+    
+    
+        <tr>
+          <td>
+        <p-listbox [options]="selRegistred" [(ngModel)]="selectedRegistred">
+            <p-header>
+               Registrovani korisnici
+            </p-header>
+            <ng-template let-user let-i="index" pTemplate="item">
+              {{user.label}}/{{user.value.userName}}
+            </ng-template>
+          </p-listbox>
+          </td>
+          <td>
+          <div *ngIf = "selectedRegistred != null">
+              {{selectedRegistred.userName}} <br>
+              {{selectedRegistred.email}}
+          </div>
+          </td>
+        </tr>
+        <tr>
+            <td colspan="2"><p-button label="Izbrisi" (onClick) = "izbrisi($event)"></p-button></td>
+            
+        </tr>
+        
+        </table>

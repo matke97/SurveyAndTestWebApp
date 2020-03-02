@@ -1,0 +1,160 @@
+<form (ngSubmit)="regForma.form.valid && tryRegister()"  #regForma = 'ngForm'>
+  <table>
+<!--Unos imena-->
+    <tr>
+      <td >
+          <span class="ui-float-label">
+              <input id="float-input" type="text" name="ime" #ime="ngModel" size="30"  [(ngModel)] = "user.ime" required pInputText> 
+              <label for="float-input">&nbsp; Ime*</label>
+              
+            </span>
+            <label *ngIf = 'regForma.submitted && ime.invalid'  style="color: red">Unesite ime</label>
+      </td>
+    </tr>
+<!--Unos prezime-->
+      <tr>
+          <td>
+              <span class="ui-float-label">
+                  <input id="float2-input" type="text"  name = "prezime" #prezime="ngModel" size="30"  [(ngModel)] = 'user.prezime' required pInputText> 
+                  <label for="float2-input" >  &nbsp; Prezime*</label>
+                  
+                </span>
+                <div *ngIf = 'regForma.submitted && prezime.invalid'  style="color: red">Unesite prezime</div>
+          </td>
+        </tr>
+<!--Unos username-->
+        <tr>
+          <td>
+              <span class="ui-float-label">
+                  <input id="userN " type="text"  name = "userN" #userN="ngModel" size="30"  [(ngModel)] = 'user.userName' required pInputText> 
+                  <label for="userN">&nbsp; Korisničko ime*</label>
+                  
+                </span>
+                <label *ngIf = 'regForma.submitted && userN.invalid'  style="color: red">Unesite Korisničko ime</label>
+          </td>
+        </tr>
+<!--Unos email-->
+        <tr>
+            <td>
+                <span class="ui-float-label">
+                    <input id="em" type="email"  name = "mail" #mail="ngModel" size="30"  [(ngModel)] = 'user.email'  [email]="true" required pInputText> 
+                    <label for="em">&nbsp; E-mail*</label>
+                    
+                  </span>
+                  <div *ngIf = 'regForma.submitted && mail.invalid'  style="color: red">
+                   <label *ngIf = 'mail.errors?.required'>Unesite mail</label> 
+                   <label *ngIf= "mail.errors.email">Email->example@prov.com</label>
+                  </div>
+            </td>
+          </tr>
+ <!--Unos password-->                  
+              <tr>
+                  <td>
+                      <span class="ui-float-label">
+                          <input id="pass " type="password"  name = "pass" #pass="ngModel" size="30"  [(ngModel)] = 'user.password' minlength="8" maxlength="16"
+                           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@\.\*_]).{8,16}$" pInputText required> 
+                          <label for="pass">&nbsp; Lozinka*</label>
+                          
+                        </span>
+                        <label *ngIf = "regForma.submitted && pass.errors?.required" style="color: red">Unesite lozinku</label>
+                  </td>
+
+                  <TD>
+                      <div *ngIf = 'regForma.submitted && pass.invalid'  style="color: red">
+                          
+                          <label *ngIf = "pass.errors.pattern">Lozinka mora sadrzati bar 1 veliko slovo 1 spec zank i jedan broj</label>
+                        </div>
+                    </TD>
+                </tr>
+  <!--Unos password2-->
+                <tr>
+                    <td>
+                        <span class="ui-float-label">
+                            <input id="pass2 " type="password"  name = "pass2" #pass2="ngModel" size="30"  [(ngModel)] = 'password2' required pInputText> 
+                            <label for="pass2">&nbsp; Potvrdi lozinku*</label>
+                            
+                          </span>
+                          <label *ngIf = 'regForma.submitted && pass2.invalid'  style="color: red">Unesite password</label>
+                    </td>
+                  </tr>
+ <!--Unos telefon-->             
+                  <tr>
+                      <td >
+                          <span class="ui-float-label">
+                              <input id="tel-input" type="tel" name="tel" #tel="ngModel" size="30"  [(ngModel)] = "user.telefon" pattern="^[0-9]+$" pInputText> 
+                              <label for="tel-input">&nbsp; Telefon*</label>
+                              
+                            </span>
+                            <label *ngIf = 'regForma.submitted && tel.invalid'  style="color: red" >Unesite tel</label>
+                      </td>
+                      <TD>
+                          <div *ngIf = 'regForma.submitted && tel.invalid'  style="color: red">
+                              
+                              <label *ngIf = "tel.errors?.pattern">Neispravan telefon</label>
+                            </div>
+                        </TD>
+                    </tr>
+                  
+ <!--Unos jmbg-->    
+        <tr>            
+                    <td>
+                        <span class="ui-float-label">
+                            <input id="jmbg" type="text"  name = "jmbg" #jmbg="ngModel" size="30"  [(ngModel)] = 'user.jmbg' minlength="13" maxlength="13"
+                             pattern="^[0-9]{13}" pInputText required> 
+                            <label for="jmbg">&nbsp; JMBG*</label>
+                           
+                          </span>
+                          <label *ngIf = "regForma.submitted && jmbg.errors?.required" style="color: red">Unesite JMBG</label>
+                    </td>
+  
+                    <TD>
+                        <div *ngIf = 'regForma.submitted && jmbg.invalid'  style="color: red">
+                            
+                            <label *ngIf = "jmbg.errors.pattern">Neispravan JMBG</label>
+                          </div>
+                      </TD>
+                  </tr>
+
+                  <tr>
+                    <td >
+                        <span class="ui-float-label">
+                            <input id="mestor" type="text" name="mestoR" #ime="ngModel" size="30"  [(ngModel)] = "user.mesto_rodj" required pInputText> 
+                            <label for="mestor">&nbsp; MestoRodjenja*</label>
+                            
+                          </span>
+                          <label *ngIf = 'regForma.submitted && ime.invalid'  style="color: red">Unesite mestorodj</label>
+                    </td>
+                  </tr>
+  <!--Unos datum rodjenja-->        
+        <tr>
+          <td>
+            <div class="ui-g-12 ui-md-4">
+                <p-calendar id="cal" name="calendar" placeholder="Datum rođenja"  [monthNavigator]="true" [yearNavigator]="true" yearRange="1930:2020"  [(ngModel)]="user.datum_rodj" dateFormat="dd.mm.yy" required name = "cal" #cal="ngModel"></p-calendar>
+              </div>
+              
+              </td>
+        </tr>
+        <tr *ngIf = 'regForma.submitted && cal.invalid'>
+            <label *ngIf = 'regForma.submitted && cal.invalid'  style="color: red">Unesite darum rodjenja</label>
+        </tr>
+<!--
+        <tr>
+          <td>
+             
+            Dodaj profilnu sliku:<br>
+            <input type="file" (change) = "uploadImage($event.target.files)" >
+           </td>
+        </tr> -->
+      </table>
+      <table>
+          <re-captcha (resolved)="resolved($event)" siteKey="6LeVDdQUAAAAAMPEV-VEmypO8eX2izx_U_sTM8KF"></re-captcha>
+        <tr>
+            <p-button label = "Register" icon="pi pi-caret-right" iconPos = 'right' ></p-button> &nbsp;
+        </tr>
+
+ 
+</table>
+</form>
+
+
+

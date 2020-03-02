@@ -1,0 +1,78 @@
+<header>
+<p-toolbar>
+  <div  class="ui-toolbar-group-left">
+      <p-button label = "Home" icon="pi pi-home" (onClick) = "retHome($event)"></p-button>
+  </div>
+    <div class="ui-toolbar-group-right">
+        
+        <p-button label = "LogOut" icon="pi pi-sign-out" (onClick) = "logout($event)"></p-button>
+    </div>
+    </p-toolbar>
+</header>
+
+<div *ngIf = "anketa.tip == 'test'">
+  <br>
+  Vreme: {{timeleft}}
+  <br>
+</div>
+
+<br>
+<ng-container *ngFor = "let i of ' '.repeat(anketa.brStrana).split(''), let str = index">
+  <div *ngIf = "str == trenutnaStrana">
+    <br>
+    
+    <ng-container *ngFor = "let dd of ' '.repeat(questPerPage).split(''), let ind = index">
+      <app-pitanje-ispitivanje [pitanje] = "anketa.pitanjaLista[str * questPerPage + ind]" [(odgovor)] = "listic.odgovori[str * questPerPage + ind]"></app-pitanje-ispitivanje>
+    </ng-container>
+
+    <ng-container *ngIf = "trenutnaStrana == (anketa.brStrana - 1)">
+      <div *ngFor = "let dd of ' '.repeat(ostatak).split(''), let ind = index"> 
+      
+        <app-pitanje-ispitivanje [pitanje] = "anketa.pitanjaLista[anketa.brStrana * questPerPage + ind]" [(odgovor)] = "listic.odgovori[anketa.brStrana * questPerPage + ind]"></app-pitanje-ispitivanje>
+      </div>
+    </ng-container>
+    Pg {{str + 1}}/ {{anketa.brStrana}} <br><br>
+  </div>
+  
+</ng-container>
+
+
+<ng-container *ngIf = "trenutnaStrana == anketa.brStrana">
+  <br>
+  
+  <p-progressBar [value]="progresBar" ></p-progressBar>
+</ng-container>
+<ng-container *ngIf = "trenutnaStrana >= anketa.brStrana">
+<br>
+
+  <table>
+    <tr >
+      <td>Pitanje</td>
+      <td>Odgovor</td>
+    </tr>
+    <tr *ngFor = "let pit of listic.pitanja, let i = index">
+      <tD>
+        {{pit}}
+      </tD>
+      <td>
+          {{listic.odgovori[i]}}
+      </td>
+      <td *ngIf = "trenutnaStrana > anketa.brStrana && anketa.tip == 'test'">
+          {{poeniPoOdgovoru[i]}}
+      </td>
+    </tr>
+  </table>
+</ng-container>
+<ng-container *ngIf = "trenutnaStrana > anketa.brStrana">
+  <br><br>
+{{message}} <br>
+
+<h3 *ngIf = "anketa.tip == 'test'">
+  {{result}} / {{maxP}}
+  
+</h3>
+</ng-container>
+<br>
+<p-button label="Nazad" (onClick) = "back($event)" icon="pi pi-caret-left"></p-button>  &nbsp;
+<p-button label="Dalje" (onClick) = "next($event)" icon = "pi pi-caret-right" iconPos = 'right'></p-button>
+  <bR><br><bR>

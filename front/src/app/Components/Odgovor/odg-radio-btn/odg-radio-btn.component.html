@@ -1,0 +1,22 @@
+
+<br>
+<div>
+    <p-button label = "DodajOpciju"   (onClick) = "addAnswer($event)" icon="pi pi-plus"></p-button> &nbsp;
+    <p-button label = "UkloniOpciju"  (onClick) = "removeAnswer($event)" icon="pi pi-times"></p-button> <br>
+    <ng-container *ngIf = "tip == 'test'">  
+        Selektuj tacan odgovor
+    </ng-container>
+<br>
+<ng-container *ngFor="let i of ' '.repeat(brOdgovora).split(''), let x = index">
+  <br>
+  <input type="text" pInputText placeholder="unesi naziv opcije" [(ngModel)] = "options[x]" required> 
+  <ng-container *ngIf = "tip == 'test'">
+    &nbsp;<p-radioButton name="answer" value = {{options[x]}} [(ngModel)] = "correctAnswer"></p-radioButton>
+  </ng-container>
+  <br>
+  
+</ng-container>
+<ng-container *ngIf = "tip == 'test'">  
+  Tacan odgovor: {{correctAnswer}}
+</ng-container>
+</div>
