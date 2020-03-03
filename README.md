@@ -10,7 +10,7 @@ Mean stack web application.
 
 ## How to run it:
 Repo doesn't contain node_modules folder, if You want to build this app on your machine, you need to install these components.\
-In frontentd: \
+In frontentd: 
 - npm install primeng --save
 - npm install primeicons --save
 - npm install @angular/cdk --save
@@ -19,7 +19,7 @@ In frontentd: \
 - npm install @angular/material@7.3.7 --save
 - npm i ng-recaptcha --save
 - npm install chart.js --save \
-In backend: \
+In backend: 
 - npm install express --save
 - npm install cors --save
 - npm install mongodb --save
