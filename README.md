@@ -2,8 +2,9 @@
 Internet Application Programming project 
 
 ## Description:
-Implemented a web application that is used to create surveys and tests, fill out and view results of completed profiles and tests.
-Mean stack web application.
+Implemented a web application that is used to create surveys and tests, fill out and view results of completed surveys and tests.
+
+Used MEAN stack to implement this web app. Whole requirements are stored  [HERE](https://github.com/matke97/SurveyAndTestWebApp/blob/master/2019_2020_IR3PIA-Projekat-SRB.pdf)
 
 ## Prerequisites:
 - NodeJS
